@@ -68,17 +68,18 @@
         </nav>
         <div class="container">
             <div class="row">
+                @if(Auth::check())
                     <div class="col-lg-4">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <a href="/home">Home</a>
                             </li>
                             <li class="list-group-item">
-                                    <a href="/create/post">Create Post</a>
-                                </li>
+                            <a href="{{route('create.post')}}">Create Post</a>
+                            </li>
                         </ul>
                     </div>
-              
+              @endif
                 <div class="col-lg-8">
                     @yield('content')
                 </div>
