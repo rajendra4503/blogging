@@ -11,9 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
-
+    
 </head>
 <body>
     <div id="app">
@@ -74,11 +77,28 @@
                             <li class="list-group-item">
                                 <a href="/home">Home</a>
                             </li>
+
+                             <li class="list-group-item">
+                                <a href="{{route('posts')}}">All Posts</a>
+                             </li>
+
+                             <li class="list-group-item">
+                                    <a href="{{route('posts.trashed')}}">All Trashed Posts</a>
+                             </li>
+    
                             <li class="list-group-item">
                                <a href="{{route('create.post')}}">Create Post</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{route('create.category')}}">Create Category</a>
+                            </li>
+
+                            <li class="list-group-item">
+                                  <a href="{{route('tags')}}">All Tags</a>
+                            </li>
+
+                            <li class="list-group-item">
+                                <a href="{{route('create.tag')}}">Create Tag</a>
                             </li>
 
                         </ul>
@@ -92,5 +112,15 @@
     </div>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="{{asset('/js/toastr.min.js')}}"></script>
+    <script>
+      @if(Session::has('success'))
+        toastr.success("{{Session::get('success')}}");
+      @endif
+
+      @if(Session::has('info'))
+        toastr.info("{{Session::get('info')}}");
+      @endif
+    </script>
 </body>
 </html>

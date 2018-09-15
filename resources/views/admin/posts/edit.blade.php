@@ -14,44 +14,43 @@
 
       <div class="panel panel-default">
             <div class="panel-heading">
-                  Create a new post
+                  Update post :  <b>{{$post->title}}</b>
             </div>
 
             <div class="panel-body">
-            <form action="{{route('store.post')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('update.post',['id'=>$post->id])}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                               <label for="title">Title</label>
-                              <input type="text" name="title" class="form-control">
+                              <input value="{{$post->title}}" type="text" name="title" class="form-control">
                         </div>
-
                         <div class="form-group">
                               <label for="featured">Category</label>
                               <select name="category_id" class="form-control">
                                 <option>Select Category</option>     
                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <option  @if($category->id == $post->category_id ) selected @endif value="{{$category->id}}">{{$category->name}}</option>
                                @endforeach
                               </select>
                         </div>
-                        
-
+                        <div class="form-group">                       
+                            <img class="img-thumbnail" width="150" src="{{$post->featured}}">
+                        </div>
 
                         <div class="form-group">
-                              <label for="featured">Featured image</label>
-                              <input type="file" name="featured" class="form-control">
+                            <label for="featured">Featured image</label>
+                            <input type="file" name="featured" class="form-control">
                         </div>
-                        
-                       
+
                         <div class="form-group">
                               <label for="content">Content</label>
-                              <textarea name="content" id="content" cols="5" rows="5" class="form-control"></textarea>
+                              <textarea name="content" id="content" cols="5" rows="5" class="form-control">{{$post->content}}</textarea>
                         </div>
 
                         <div class="form-group">
                               <div class="text-center">
                                     <button class="btn btn-success" type="submit">
-                                          Store post
+                                          Update Post
                                     </button>
                               </div>
                         </div>

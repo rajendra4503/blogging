@@ -15,8 +15,8 @@
       @foreach($categories as $cat)
       <tr>
       <td>{{$cat->name}}</td>
-        <td><a href="">Edit</a></td>
-        <td><a href="">Delete</a></td>
+      <td><a href="{{route('category.edit',['id'=>$cat->id])}}" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a></td>
+      <td><a href="{{route('category.delete',['id'=>$cat->id])}}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a></td>
       </tr>
       @endforeach
     </tbody>

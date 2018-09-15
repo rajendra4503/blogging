@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Post;
-
+use App\Category;
+use Session;
 class PostsController extends Controller
 {
     /**
@@ -14,7 +13,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('admin.posts.index')->with('posts',$posts);
     }
 
     /**
@@ -24,7 +24,16 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $category = Category::all();
+
+        if($category->count() ==0){
+
+           Session::flash('info','You mush have some categories before attempting to create a post.');
+
+           return redirect()->back();
+
+        }
+        return view('admin.posts.create')->with('categories',$category);
     }
 
     /**
@@ -40,10 +49,29 @@ class PostsController extends Controller
          'title'    => 'required',
          'content'  => 'required',
          'featured' => 'required|image',
-         'content'  => 'required'
+         'category_id'=> 'required'
         ]);
 
-        $input = $request->all();
+        if($request->file('featured')){ 
+
+            $featured = $request->file('featured');
+            $fileName = time().$featured->getClientOriginalName();
+            $featured->move('upload/post',$fileName);
+        }
+
+        $post = Post::create([
+
+            'title'    => $request->title,
+            'slug'     => str_slug($request->title),
+            'content'  => $request->content,
+            'featured' => 'upload/post/'.$fileName,
+            'category_id'=> $request->category_id,
+
+        ]);
+
+        Session::flash('success','Post create successfully.');
+
+        return redirect()->back();
     }
 
     /**
@@ -65,7 +93,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $category = Category::all();
+        return view('admin.posts.edit')->with('post',$post)->with('categories',$category);
     }
 
     /**
@@ -77,7 +107,32 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title'    => 'required',
+            'content'  => 'required',
+            'category_id'=> 'required'
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        if($request->hasFile('featured')){
+            $featured = $request->file('featured');
+            $fileName = time().$featured->getClientOriginalName();
+            $featured->move('upload/post',$fileName);
+            $post->featured    = 'upload/post/'.$fileName;
+        }
+
+        $post->title       = $request->title;
+        $post->slug        = str_slug($request->title);
+        $post->content     = $request->content;
+        $post->category_id = $request->category_id;
+       
+
+        $post->save();
+
+        Session::flash('success','Post Updated Successfully.');
+
+        return redirect()->route('posts');
     }
 
     /**
@@ -88,6 +143,30 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        Session::flash('success','Post trash sucessfully.');
+        return redirect()->back();
+    }
+
+    public function trashed(){
+        $posts = Post::onlyTrashed()->get();
+        return view('admin.posts.trashed')->with('posts',$posts);
+    }
+
+    public function kill($id)
+    {
+        $post = Post::withTrashed()->where('id',$id)->first();
+        $post->forceDelete();
+        Session::flash('success','Post Delete Permanently Sucessfully.');
+        return redirect()->back();
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->where('id',$id)->first();
+        $post->restore();
+        Session::flash('success','Post Restored Sucessfully.');
+        return redirect()->route('posts');
     }
 }
