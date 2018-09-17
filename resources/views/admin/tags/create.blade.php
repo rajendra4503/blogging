@@ -18,7 +18,7 @@
             </div>
 
             <div class="panel-body">
-            <form action="{{route('store.tag')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('tag.store')}}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group">
                               <label for="title">Name</label>

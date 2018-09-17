@@ -10,7 +10,7 @@ class Tag extends Model
     
     public function posts(){
 
-     return $this->blongsToMany('App\Post');
-
+     return $this->belongsToMany('App\Post');
+     
     }
 }

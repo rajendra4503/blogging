@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test',function(){
+
+  dd(App\Category::findOrFail(7)->posts());
+
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -120,9 +126,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         'as'   => 'create.tag'
     ]);
 
-    Route::post('/store/tag',[
+    Route::post('/tag/store',[
         'uses' => 'TagsController@store',
-        'as'   => 'store.tag'
+        'as'   => 'tag.store'
     ]);
 
     Route::post('/tag/update/{id}',[

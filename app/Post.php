@@ -15,17 +15,21 @@ class Post extends Model
     protected $dates = ['deleted_at'];
 
     public function getFeaturedAttribute($featured){
+
         return asset($featured);
+        
     }  
 
 
     public function category(){
-        return $this->belongsTo('App\Category');  
+
+        return $this->belongsTo('App\Category');
+
     }
 
     public function tags(){
 
-        return $this->blongsToMany('App\Tag');
+        return $this->belongsToMany('App\Tag');
 
     }
 

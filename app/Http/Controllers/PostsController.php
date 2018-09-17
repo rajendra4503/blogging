@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Tag;
 use Session;
 class PostsController extends Controller
 {
@@ -14,6 +15,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
+
         return view('admin.posts.index')->with('posts',$posts);
     }
 
@@ -25,15 +27,13 @@ class PostsController extends Controller
     public function create()
     {
         $category = Category::all();
-
+        $tags = Tag::all();
         if($category->count() ==0){
-
            Session::flash('info','You mush have some categories before attempting to create a post.');
-
            return redirect()->back();
-
         }
-        return view('admin.posts.create')->with('categories',$category);
+        return view('admin.posts.create')->with('categories',$category)
+                                         ->with('tags',$tags);
     }
 
     /**
@@ -45,29 +45,44 @@ class PostsController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request,[
+
          'title'    => 'required',
+
          'content'  => 'required',
+
          'featured' => 'required|image',
+
+         'tags'=> 'required',
+
          'category_id'=> 'required'
         ]);
 
         if($request->file('featured')){ 
 
             $featured = $request->file('featured');
+
             $fileName = time().$featured->getClientOriginalName();
+
             $featured->move('upload/post',$fileName);
         }
 
         $post = Post::create([
 
             'title'    => $request->title,
+
             'slug'     => str_slug($request->title),
+
             'content'  => $request->content,
+
             'featured' => 'upload/post/'.$fileName,
+
             'category_id'=> $request->category_id,
 
         ]);
+
+        $post->tags()->attach($request->tags);
 
         Session::flash('success','Post create successfully.');
 
@@ -95,7 +110,11 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $category = Category::all();
-        return view('admin.posts.edit')->with('post',$post)->with('categories',$category);
+        $tags = Tag::all();
+        return view('admin.posts.edit')
+        ->with('post',$post)
+        ->with('categories',$category)
+        ->with('tags',$tags);
     }
 
     /**
@@ -110,6 +129,7 @@ class PostsController extends Controller
         $this->validate($request,[
             'title'    => 'required',
             'content'  => 'required',
+            'tags'=> 'required',
             'category_id'=> 'required'
         ]);
 
@@ -121,14 +141,13 @@ class PostsController extends Controller
             $featured->move('upload/post',$fileName);
             $post->featured    = 'upload/post/'.$fileName;
         }
-
         $post->title       = $request->title;
         $post->slug        = str_slug($request->title);
         $post->content     = $request->content;
         $post->category_id = $request->category_id;
-       
-
         $post->save();
+
+        $post->tags()->sync($request->tags);
 
         Session::flash('success','Post Updated Successfully.');
 
