@@ -101,6 +101,16 @@
                                 <a href="{{route('create.tag')}}">Create Tag</a>
                             </li>
 
+                            <li class="list-group-item">
+                                 <a href="{{route('users')}}">Users</a>
+                            </li>
+
+                            <li class="list-group-item">
+                                <a href="{{route('user.profile')}}">My Profile</a>
+                           </li>
+
+                           
+
                         </ul>
                     </div>
               @endif

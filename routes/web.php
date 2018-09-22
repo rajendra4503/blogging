@@ -58,8 +58,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         'as'  => 'post.restore'
     ]);
 
-
-
     Route::get('create/post',[
         'uses'=>'PostsController@create',
         'as'  => 'create.post'
@@ -136,4 +134,44 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         'as'   => 'tag.update'
     ]);
 
+    Route::get('/users',[
+     'uses'  => 'UserController@index',
+     'as'    => 'users'
+    ]);
+
+    Route::get('/user/create',[
+        'uses' => 'UserController@create',
+        'as'   => 'user.create'
+    ])->middleware('admin');
+
+    Route::post('/user/store',[
+        'uses' => 'UserController@store',
+        'as'   => 'user.store'
+    ])->middleware('admin');
+
+    Route::get('/user/delete/{id}',[
+        'uses'  => 'UserController@delete',
+        'as'    => 'user.delete'
+    ])->middleware('admin');
+
+    Route::get('user/admin/{id}',[
+        'uses'  => 'UserController@make_admin',
+        'as'    => 'user.admin'
+    ])->middleware('admin');
+
+    Route::get('user/not_admin/{id}',[
+        'uses'  => 'UserController@not_admin',
+        'as'    => 'user.not_admin'
+    ])->middleware('admin');
+
+    Route::get('user/profile',[
+        'uses'=>'ProfilesController@index',
+        'as'  => 'user.profile'
+    ]);
+
+    Route::post('user/profile/update',[
+        'uses'=>'ProfilesController@update',
+        'as'  => 'user.profile.update'
+    ]);
+    
 });
