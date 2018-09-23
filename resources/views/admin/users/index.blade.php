@@ -34,12 +34,16 @@
                <a href="{{route('user.admin',['id'=>$user->id])}}" class="btn btn-xs btn-success">Make Admin</a>
           @endif
         </td>
-      <td><a href="{{route('user.delete',['id'=>$user->id])}}" class="btn btn-xs btn-danger" title="Delete" data-toggle="tooltip">Delete</a></td>
+      <td>
+        @if(Auth::id() != $user->id)
+          <a href="{{route('user.delete',['id'=>$user->id])}}" class="btn btn-xs btn-danger" title="Delete" data-toggle="tooltip">Delete</a>
+        @endif
+      </td>
       </tr>
       @endforeach
       @else 
       <tr>
-            <th colspan="5" class="text-center">No Users</th>
+          <th colspan="5" class="text-center">No Users</th>
       </tr>
       @endif
     </tbody>

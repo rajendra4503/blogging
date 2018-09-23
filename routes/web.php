@@ -173,5 +173,15 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         'uses'=>'ProfilesController@update',
         'as'  => 'user.profile.update'
     ]);
+
+    Route::get('setting',[
+        'uses' => 'SettingController@index',
+        'as'   => 'setting'
+    ]);
+
+    Route::post('setting/update',[
+        'uses' => 'SettingController@update',
+        'as'   => 'setting.update'
+    ]);
     
 });

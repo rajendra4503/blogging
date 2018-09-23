@@ -78,6 +78,10 @@
                                 <a href="/home">Home</a>
                             </li>
 
+                            <li class="list-group-item">
+                                <a href="{{route('setting')}}">Setting</a>
+                            </li>
+
                              <li class="list-group-item">
                                 <a href="{{route('posts')}}">All Posts</a>
                              </li>
@@ -105,7 +109,7 @@
                                  <a href="{{route('users')}}">Users</a>
                             </li>
 
-                            <li class="list-group-item">
+                           <li class="list-group-item">
                                 <a href="{{route('user.profile')}}">My Profile</a>
                            </li>
 
