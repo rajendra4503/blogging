@@ -72,7 +72,9 @@ class ProfilesController extends Controller
             'name'      =>  'required',
             'email'     =>  'required|email',
             'facebook'  =>  'required|url',
-            'youtube'   =>  'required|url'
+            'youtube'   =>  'required|url',
+            'twitter'   => 'required|url',
+            'google'    => 'required|url'
         ]);
 
         $user = Auth::user();
@@ -93,6 +95,10 @@ class ProfilesController extends Controller
         $user->profile->youtube   =  $request->youtube;
 
         $user->profile->about     =  $request->about;
+
+        $user->profile->twitter     =  $request->twitter;
+
+        $user->profile->google     =  $request->google;
 
         if($request->has('password')){
             $user->password  =  bcrypt($request->password);

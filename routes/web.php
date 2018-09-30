@@ -11,15 +11,42 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[
+    'uses'=>'FrontEndController@index',
+    'as'  => 'index'
+]);
+
 
 Route::get('/test',function(){
 
   dd(App\Category::findOrFail(7)->posts());
 
 });
+
+Route::get('/post/{slug}', [
+    'uses' => 'FrontEndController@singlePost',
+    'as' => 'post.single'
+]);
+
+
+Route::get('/category/{id}', [
+    'uses' => 'FrontEndController@category',
+    'as' => 'category.single'
+]);
+
+Route::get('/tag/{id}', [
+    'uses' => 'FrontEndController@tag',
+    'as' => 'tag.single'
+]);
+
+Route::get('/search',function(){
+    $posts = \App\Post::where('title','like','%'.request('query').'%')->get();
+    return view('search')->with('posts',$posts)
+        ->with('setting', \App\Setting::first())
+        ->with('categories', \App\Category::all())
+        ->with('query',request('query'));
+});
+
 
 Auth::routes();
 

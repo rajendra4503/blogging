@@ -64,6 +64,17 @@
                      <input value="{{$user->profile->youtube}}" name="youtube" id="youtube" class="form-control">
                 </div>
 
+              <div class="form-group">
+                    <label for="content">Twitter</label>
+                    <input value="{{$user->profile->twitter}}" name="twitter" id="twitter" class="form-control">
+              </div>
+
+              <div class="form-group">
+                    <label for="content">Google +</label>
+                    <input  value="{{$user->profile->google}}" name="google" id="google" class="form-control">
+              </div>
+
+
                 <div class="form-group">
                     <div class="text-center">
                         <button class="btn btn-success" type="submit">

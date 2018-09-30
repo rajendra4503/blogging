@@ -5,6 +5,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use Session;
+use Auth;
 class PostsController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where('user_id',Auth::id())->get();
 
         return view('admin.posts.index')->with('posts',$posts);
     }
@@ -49,45 +50,27 @@ class PostsController extends Controller
 
 
         $this->validate($request,[
-
          'title'    => 'required',
-
          'content'  => 'required',
-
          'featured' => 'required|image',
-
          'tags'=> 'required',
-
          'category_id'=> 'required'
         ]);
-
         if($request->file('featured')){ 
-
             $featured = $request->file('featured');
-
             $fileName = time().$featured->getClientOriginalName();
-
             $featured->move('upload/post',$fileName);
         }
-
         $post = Post::create([
-
             'title'    => $request->title,
-
             'slug'     => str_slug($request->title),
-
             'content'  => $request->content,
-
             'featured' => 'upload/post/'.$fileName,
-
             'category_id'=> $request->category_id,
-
+            'user_id' =>Auth::id()
         ]);
-
         $post->tags()->attach($request->tags);
-
         Session::flash('success','Post create successfully.');
-
         return redirect()->back();
     }
 
@@ -171,7 +154,7 @@ class PostsController extends Controller
     }
 
     public function trashed(){
-        $posts = Post::onlyTrashed()->get();
+        $posts = Post::onlyTrashed()->where('user_id',Auth::id())->get();
         return view('admin.posts.trashed')->with('posts',$posts);
     }
 

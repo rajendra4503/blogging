@@ -10,7 +10,7 @@ class Post extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title','content','featured','category_id','slug'];
+    protected $fillable = ['title','content','featured','category_id','slug','user_id'];
 
     protected $dates = ['deleted_at'];
 
@@ -18,8 +18,7 @@ class Post extends Model
 
         return asset($featured);
         
-    }  
-
+    } 
 
     public function category(){
 
@@ -31,6 +30,11 @@ class Post extends Model
 
         return $this->belongsToMany('App\Tag');
 
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
 

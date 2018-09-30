@@ -18,12 +18,15 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request,[
-            'name'    => 'required',
-            'email'   => 'required |email',
-            'avatar'  => 'required|image',
-            'facebook'=> 'required | url',
-            'youtube' => 'required | ulr'
+            'name'     => 'required',
+            'email'    => 'required |email',
+            'avatar'   => 'required|image',
+            'facebook' => 'required | url',
+            'youtube'  => 'required | url',
+            'twitter'  => 'required | url',
+            'google'   => 'required | url'
         ]);
         if($request->file('avatar')){ 
             $featured = $request->file('avatar');
@@ -40,7 +43,9 @@ class UserController extends Controller
             'avatar'   => 'upload/avatars/'.$fileName,
             'facebook' => $request->facebook,
             'youtube'  => $request->youtube,
-            'about'   => $request->about,
+            'about'    => $request->about,
+            'twitter'  => $request->twitter,
+            'google'   => $request->google
         ]);
         Session::flash('success','New User Create Successfully.');
         return redirect()->route('users');
