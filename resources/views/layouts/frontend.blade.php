@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/primary-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/magnific-popup.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <style>
         .padded-50{
             padding: 40px;
@@ -38,9 +39,10 @@
                     <div class="subscribe scrollme">
                         <div class="col-lg-6 col-lg-offset-5 col-md-6 col-md-offset-5 col-sm-12 col-xs-12">
                             <h4 class="subscribe-title">Email Newsletters!</h4>
-                            <form class="subscribe-form" method="post" action="">
+                            <form class="subscribe-form" method="post" action="/subscribe">
+                                {{csrf_field()}}
                                 <input class="email input-standard-grey input-white" name="email" required="required" placeholder="Your Email Address" type="email">
-                                <button class="subscr-btn">subscribe
+                                <button class="subscr-btn" type="submit">subscribe
                                     <span class="semicircle--right"></span>
                                 </button>
                             </form>
@@ -122,5 +124,10 @@
         <script src="{{ asset('app/js/ScrollMagic.min.js') }}"></script>
         <script src="{{ asset('app/js/animation.velocity.min.js') }}"></script>
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb0506a87427dd7"></script>
+        <script>
+          @if(Session::has('success'))
+            toastr.success("{{Session::get('success')}}");
+          @endif
+        </script>
     </body>
     </html> 

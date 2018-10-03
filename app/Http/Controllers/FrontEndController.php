@@ -5,8 +5,25 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\Setting;
+use Newsletter;
+use Session;
 class FrontEndController extends Controller
 {
+   
+
+    public function subscribe(){
+
+        $email = request('email');
+
+        Newsletter::subscribe($email);
+
+        Session::flash('success','Subscribed Successfully.');
+        
+        return redirect()->back();
+
+    }
+
+
     public function index(){
 
         return view('index')

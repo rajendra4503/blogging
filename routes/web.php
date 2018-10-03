@@ -23,6 +23,11 @@ Route::get('/test',function(){
 
 });
 
+Route::post('/subscribe',[
+    'uses' => 'FrontEndController@subscribe',
+    'as' => 'subscribe'
+]);
+
 Route::get('/post/{slug}', [
     'uses' => 'FrontEndController@singlePost',
     'as' => 'post.single'
