@@ -9,16 +9,14 @@
                                 <span class="short-line"></span>
                                 <span class="long-line"></span>
                             </div>
-                            <p class="heading-text">Qolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibham
-                                liber tempor cum soluta nobis eleifend option congue nihil uarta decima et quinta.
-                                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                                ut aliquip ex ea commodo consequat eleifend option nihil. Investigationes demonstraverunt
-                                lectores legere me lius quod ii legunt saepius parum claram.
-                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="text-center" style="text-align:justify">
+                            {{$setting->about}}
                         </div>
                     </div>
                 </div>
-    
             </div>
     
             <div class="row">

@@ -13,6 +13,7 @@ class SettingController extends Controller
     public function update(){
         $this->validate(request(),[
             'site_name' => 'required',
+            'site_about' => 'required',
             'contact_number' => 'required',
             'contact_mail' => 'required | email',
             'address' => 'required',
@@ -22,6 +23,7 @@ class SettingController extends Controller
         ]);
         $setting = Setting::first();
         $setting->site_name = request()->site_name;
+        $setting->about = request()->site_about;
         $setting->contact_number = request()->contact_number;
         $setting->contact_mail = request()->contact_mail;
         $setting->address = request()->address;

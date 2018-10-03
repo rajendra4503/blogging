@@ -46,73 +46,46 @@
                         </div>
 
                         <div class="post__content-info">
-
                             {!! $post->content !!}
-                            
                             <br><br>
                             <div class="widget w-tags">
                                 <div class="tags-wrap">
                                     @foreach($post->tags as $tag)
-                                         <a href="{{ route('tag.single', ['id' => $tag->id ]) }}" class="w-tags-item">{{ $tag->tag }}</a>
-                                     @endforeach
+                                        <a href="{{ route('tag.single', ['id' => $tag->id ]) }}" class="w-tags-item">{{ $tag->tag }}</a>
+                                    @endforeach
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
-                    <div class="socials">Share:
-                        <a href="#" class="social__item">
-                            <i class="seoicon-social-facebook"></i>
-                        </a>
-                        <a href="#" class="social__item">
-                            <i class="seoicon-social-twitter"></i>
-                        </a>
-                        <a href="#" class="social__item">
-                            <i class="seoicon-social-linkedin"></i>
-                        </a>
-                        <a href="#" class="social__item">
-                            <i class="seoicon-social-google-plus"></i>
-                        </a>
-                        <a href="#" class="social__item">
-                            <i class="seoicon-social-pinterest"></i>
-                        </a>
+                    <div class="socials text-center">
+                        <div class="addthis_inline_share_toolbox"></div>
                     </div>
 
                 </article>
-
                 <div class="blog-details-author">
-
                     <div class="blog-details-author-thumb">
                         <img class="img-rounded" alt="{{ $post->user->name }}" width="75" height="75" src="{{ asset($post->user->profile->avatar) }}">
                     </div>
-
                     <div class="blog-details-author-content">
                         <div class="author-info">
                             <h5 class="author-name">{{ $post->user->name }}</h5>
-                           
                         </div>
                         <p class="text">{{ $post->user->profile->about }}
                         <div class="socials">
-
-
                             <a href="{{ $post->user->profile->facebook }}" class="social__item" target="_blank">
                                 <img src="{{ asset('app/svg/circle-facebook.svg') }}" alt="facebook">
                             </a>
-
                             <a href="{{ $post->user->profile->youtube }}" class="social__item" target="_blank">
-                                        <img src="{{ asset('app/svg/youtube.svg') }}" alt="youtube">
+                                <img src="{{ asset('app/svg/youtube.svg') }}" alt="youtube">
                             </a>
-
                             </a>
                             <a href="{{ $post->user->profile->twitter }}" class="social__item">
                                 <img src="{{ asset('app/svg/twitter.svg') }}" alt="twitter">
                             </a>
-
                             <a href="{{ $post->user->profile->google }}" class="social__item">
                                 <img src="{{ asset('app/svg/google.svg') }}" alt="google">
                             </a>
-
                         </div>
                     </div>
                 </div>
@@ -152,14 +125,10 @@
                             <span class="long-line"></span>
                         </div>
                     </div>
+
                     @include('includes.disqus')
-                </div>
-
-                <div class="row">
 
                 </div>
-
-
             </div>
 
             <!-- End Post Details -->
@@ -178,7 +147,7 @@
                         </div>
 
                         <div class="tags-wrap">
-                        @foreach($tags as $tag)
+                          @foreach($tags as $tag)
                                 <a href="{{ route('tag.single', ['id' => $tag->id ]) }}" class="w-tags-item">{{ $tag->tag }}</a>
                           @endforeach
                         </div>

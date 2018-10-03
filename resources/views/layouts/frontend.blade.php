@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/primary-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app/css/magnific-popup.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-        <style>
+    <style>
         .padded-50{
             padding: 40px;
         }
@@ -23,22 +23,14 @@
             text-align: center;
         }
     </style>
-
 </head>
 <body class=" ">
-
 <!-- Header -->
-
 @include('includes.header')
-
 <!-- ... End Header -->
-
 <div class="content-wrapper">
-
     @yield('content')
-
 <!-- Subscribe Form -->
-
 <div class="container-fluid bg-green-color">
         <div class="row">
             <div class="container">
@@ -53,9 +45,7 @@
                                 </button>
                             </form>
                             <div class="sub-title">Sign up for new Seosignt content, updates, surveys & offers.</div>
-    
                         </div>
-    
                         <div class="images-block">
                                 <img src="{{ asset('app/img/subscr-gear.png')}}" alt="gear" class="gear">
                                 <img src="{{ asset('app/img/subscr1.png')}}" alt="mail" class="mail">
@@ -66,14 +56,11 @@
             </div>
         </div>
     </div>
-    
     <!-- End Subscribe Form -->
     </div>
-    
     <!-- Footer -->
         @include('includes.footer')
     <!-- End Footer -->
-    
     <svg style="display:none;">
         <symbol id="arrow-left" viewBox="122.9 388.2 184.3 85">
             <path d="M124.1,431.3c0.1,2,1,3.8,2.4,5.2c0,0,0.1,0.1,0.1,0.1l34.1,34.1c1.6,1.6,3.7,2.5,5.9,2.5s4.3-0.9,5.9-2.4
@@ -106,11 +93,8 @@
               L6.01189661,12.4115388 C4.23965876,13.1816085 3,14.9491311 3,17 C3,19.7614237 5.23249418,22 7.99943992,22 L16,22 L16,16 L12.75,19.25
                L12,18.5 L16.5,14 L21,18.5 L20.25,19.25 L17,16 L17,22 L17,22 Z M16,22 L16,27 L17,27 L17,22 L16,22 L16,22 Z" id="cloud-upload"></path>
         </symbol>
-    
     </svg>
-    
     <!-- Overlay Search -->
-    
     <div class="overlay_search">
         <div class="container">
             <div class="row">
@@ -126,11 +110,8 @@
             </div>
         </div>
     </div>
-    
     <!-- End Overlay Search -->
-    
     <!-- JS Script -->
-    
         <script src="{{ asset('app/js/jquery-2.1.4.min.js') }}"></script>
         <script src="{{ asset('app/js/crum-mega-menu.js') }}"></script>
         <script src="{{ asset('app/js/swiper.jquery.min.js') }}"></script>
@@ -140,6 +121,6 @@
         <script src="{{ asset('app/js/velocity.min.js') }}"></script>
         <script src="{{ asset('app/js/ScrollMagic.min.js') }}"></script>
         <script src="{{ asset('app/js/animation.velocity.min.js') }}"></script>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bb0506a87427dd7"></script>
     </body>
-    </html>
-    
+    </html> 

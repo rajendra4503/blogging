@@ -20,9 +20,17 @@
             <div class="panel-body">
             <form action="{{route('setting.update')}}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
+
                 <div class="form-group">
                     <label for="title">Site Name</label>
                     <input type="text" value="{{$setting->site_name}}" name="site_name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                        <label for="title">About Site</label>
+                        <textarea name="site_about" id="site_about" cols="5" rows="5" class="form-control">{{$setting->about}}
+                        </textarea>
+                       
                 </div>
 
                 <div class="form-group">
